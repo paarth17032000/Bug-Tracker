@@ -22,10 +22,21 @@ export const bugRemoved = id => {
     )
 }
 
-export const bugResolved = id => {
+export const bugResolvedToTrue = id => {
     return (
         {
-            type: actions.bugResolved,
+            type: actions.bugResolvedToTrue,
+            payload: {
+                id
+            }
+        }
+    )
+}
+
+export const bugResolvedToFalse = id => {
+    return (
+        {
+            type: actions.bugResolvedToFalse,
             payload: {
                 id
             }

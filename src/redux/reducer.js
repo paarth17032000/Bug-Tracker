@@ -7,6 +7,7 @@ let id = 0
 
 function reducer(state = [], action){
     switch(action.type){
+        
         case actions.bugAdded: 
             return[
                 ...state,
@@ -20,9 +21,14 @@ function reducer(state = [], action){
         case actions.bugRemoved:
             return state.filter( bug => action.payload.id !== bug.id)
 
-        case actions.bugResolved:
+        case actions.bugResolvedToTrue:
             return state.map( bug => 
                 bug.id !== action.payload.id ? bug : {...bug, resolved: true}
+            );
+
+        case actions.bugResolvedToFalse:
+            return state.map( bug => 
+                bug.id !== action.payload.id ? bug : {...bug, resolved: false}
             );
 
         default:

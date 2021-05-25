@@ -4,17 +4,22 @@ import Button from '@material-ui/core/Button'
 import TextField from '@material-ui/core/TextField'
 import { Card, CardContent, CardHeader, Container, IconButton } from '@material-ui/core'
 import { connect } from 'react-redux';
-import { bugAdded, bugRemoved } from '../redux/actions'
-import DeleteIcon from '@material-ui/icons/Delete';
+import { bugAdded, bugRemoved, bugResolvedToTrue, bugResolvedToFalse } from '../redux/actions'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 class Preview extends Component{
-    state={
+    state = {
         desc: ''
     }
     handleDesc = (e) => {
         this.setState({
             desc: e.target.value
         })
+    }
+    bugStatus = (bug) => {
+        // console.log(bug,223)
+        // console.log(111,bug.id, bug.resolved)
+        bug.resolved ? this.props.bugResolvedToFalse(bug.id) : this.props.bugResolvedToTrue(bug.id) 
     }
     render() {
         const {bugs, bugAdded, bugRemoved} = this.props;
@@ -53,15 +58,22 @@ class Preview extends Component{
                                 >
                                     <CardHeader
                                         action={
-                                        <IconButton
-                                            onClick={() => bugRemoved(bug.id)}
-                                        >
-                                            <DeleteIcon />
-                                        </IconButton>
+                                            <IconButton
+                                                onClick={() => bugRemoved(bug.id)}
+                                            >
+                                                <DeleteIcon />
+                                            </IconButton>
                                         }
                                         title={bug.id}
                                     />
-                                    <CardContent>
+                                    <CardContent >
+                                        <Button
+                                            variant="contained"
+                                            color={bug.resolved ? 'primary' : 'inherit' }
+                                            onClick={() => {this.bugStatus(bug)}}
+                                        >
+                                            Bug Status : {bug.resolved ? 'True' : 'False'}   
+                                        </Button>
                                         <Typography variant="body2" color="primary">
                                             {bug.desc}
                                         </Typography>
@@ -86,7 +98,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         bugAdded: (e) => dispatch(bugAdded(e)),
-        bugRemoved: (e) => dispatch(bugRemoved(e))
+        bugRemoved: (e) => dispatch(bugRemoved(e)),
+        bugResolvedToTrue: (e) => dispatch(bugResolvedToTrue(e)),
+        bugResolvedToFalse: (e) => dispatch(bugResolvedToFalse(e))
     }
 }
 

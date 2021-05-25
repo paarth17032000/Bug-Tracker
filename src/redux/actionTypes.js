@@ -1,4 +1,5 @@
 export const bugAdded = "bugAdded";
 export const bugRemoved = "bugRemoved";
-export const bugResolved = "bugResolved";
+export const bugResolvedToTrue = "bugResolvedToTrue";
+export const bugResolvedToFalse = "bugResolvedToFalse";
 
