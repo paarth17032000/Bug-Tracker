@@ -13,9 +13,9 @@ store.subscribe( () => {
 })
 
 
-store.dispatch(functions.bugAdded('bug lele muh mein'))
-store.dispatch(functions.bugAdded('maa ki aankh'))
-store.dispatch(functions.bugAdded('redux samajh aa rha hai'))
+store.dispatch(functions.bugAdded('bug 1'))
+store.dispatch(functions.bugAdded('bug 2'))
+store.dispatch(functions.bugAdded('bug 3'))
 // store.dispatch(functions.bugRemoved(2))
 
 // store.dispatch(functions.bugRemoved(3))
